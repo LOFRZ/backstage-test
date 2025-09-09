@@ -8,7 +8,7 @@ COPY . .
 
 RUN yarn install --immutable
 
-RUN yarn build:frontend
+RUN yarn build
 
 RUN npm install -g serve
 
