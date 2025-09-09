@@ -3,13 +3,13 @@
   "name": "mon-backstage-app",
   "builds": [
     {
-      "src": "package.json",
-      "use": "@vercel/node"
+      "src": "packages/app/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
     }
   ],
-  "scripts": {
-    "build": "yarn install --frozen-lockfile && yarn build:frontend"
-  },
   "routes": [
     {
       "src": "/static/(.*)",
@@ -19,6 +19,5 @@
       "src": "/(.*)",
       "dest": "/packages/app/dist/index.html"
     }
-  ],
-  "outputDirectory": "packages/app/dist"
+  ]
 }
