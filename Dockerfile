@@ -4,14 +4,13 @@ WORKDIR /app
 
 # Copy package files
 COPY package*.json yarn.lock ./
-COPY packages/app/package.json ./packages/app/
-COPY plugins/ma-premiere-page/package.json ./plugins/ma-premiere-page/
+
+# Copy all packages and plugins structure
+COPY packages/ ./packages/
+COPY plugins/ ./plugins/
 
 # Install dependencies
 RUN yarn install --frozen-lockfile
-
-# Copy source code
-COPY . .
 
 # Build the frontend
 RUN yarn build:frontend
