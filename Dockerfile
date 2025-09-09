@@ -8,7 +8,7 @@ COPY . .
 
 RUN yarn install --immutable
 
-RUN yarn workspace app build && yarn workspace backend build
+RUN yarn workspace app build
 
 RUN npm install -g serve
 
