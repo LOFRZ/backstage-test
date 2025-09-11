@@ -81,9 +81,31 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 600,
     textTransform: 'none',
     fontSize: '14px',
+    color: '#4c1d95',
     '&.Mui-selected': {
       color: '#667eea',
     },
+  },
+  // Nouvelles classes pour les couleurs de texte
+  primaryText: {
+    color: '#4c1d95', // Violet foncé
+  },
+  secondaryText: {
+    color: '#6366f1', // Indigo
+  },
+  accentText: {
+    color: '#667eea', // Bleu-violet
+  },
+  headerText: {
+    color: '#312e81', // Violet très foncé
+    fontWeight: 600,
+  },
+  subtitleText: {
+    color: '#5b21b6', // Violet foncé
+  },
+  placeholderText: {
+    color: '#6366f1', // Indigo
+    fontWeight: 500,
   },
 }));
 
@@ -93,7 +115,7 @@ const MetricCard = ({ title, value, icon: Icon, trend, color, classes }) => (
     <CardContent>
       <Box display="flex" alignItems="center" justifyContent="space-between">
         <Box>
-          <Typography variant="h6" style={{ color: '#6b7280', fontWeight: 500 }}>
+          <Typography variant="h6" className={classes.secondaryText} style={{ fontWeight: 500 }}>
             {title}
           </Typography>
           <Typography className={classes.animatedCounter}>
@@ -153,10 +175,10 @@ const ServiceStatus = ({ name, status, responseTime, classes }) => {
       <Box display="flex" alignItems="center">
         <StatusIcon style={{ color: statusColors[status], marginRight: '12px' }} />
         <Box>
-          <Typography variant="subtitle1" style={{ fontWeight: 600 }}>
+          <Typography variant="subtitle1" className={classes.primaryText} style={{ fontWeight: 600 }}>
             {name}
           </Typography>
-          <Typography variant="caption" style={{ color: '#6b7280' }}>
+          <Typography variant="caption" className={classes.secondaryText}>
             Response: {responseTime}ms
           </Typography>
         </Box>
@@ -243,7 +265,7 @@ export const ExampleComponent = () => {
         />
         <Content>
           <ContentHeader title="Live Demo - Enterprise Platform Dashboard">
-            <Typography style={{ color: '#6b7280', fontSize: '16px' }}>
+            <Typography className={classes.subtitleText} style={{ fontSize: '16px' }}>
               Monitoring 42 services • 2.8K active users • 156 deployments today
             </Typography>
           </ContentHeader>
@@ -318,7 +340,7 @@ export const ExampleComponent = () => {
               <Grid item xs={12} md={8}>
                 <Card className={classes.chartCard}>
                   <CardContent style={{ padding: '32px' }}>
-                    <Typography variant="h5" style={{ marginBottom: '24px', fontWeight: 600 }}>
+                    <Typography variant="h5" className={classes.headerText} style={{ marginBottom: '24px' }}>
                       Performance Trends
                     </Typography>
                     <Box 
@@ -326,16 +348,18 @@ export const ExampleComponent = () => {
                       display="flex" 
                       alignItems="center" 
                       justifyContent="center"
+                      flexDirection="column"
                       style={{
                         background: 'linear-gradient(135deg, #667eea20 0%, #764ba220 100%)',
                         borderRadius: '12px',
-                        fontSize: '18px',
-                        color: '#6b7280'
                       }}
                     >
-                      Real-time performance visualization
-                      <br />
-                      CPU: 78% • Memory: 65% • Network: 234 MB/s
+                      <Typography variant="h6" className={classes.placeholderText} style={{ textAlign: 'center' }}>
+                        Real-time performance visualization
+                      </Typography>
+                      <Typography variant="body1" className={classes.accentText} style={{ textAlign: 'center', marginTop: '8px' }}>
+                        CPU: 78% • Memory: 65% • Network: 234 MB/s
+                      </Typography>
                     </Box>
                   </CardContent>
                 </Card>
@@ -344,7 +368,7 @@ export const ExampleComponent = () => {
               <Grid item xs={12} md={4}>
                 <Card className={classes.chartCard}>
                   <CardContent style={{ padding: '24px' }}>
-                    <Typography variant="h6" style={{ marginBottom: '16px', fontWeight: 600 }}>
+                    <Typography variant="h6" className={classes.headerText} style={{ marginBottom: '16px' }}>
                       Quick Actions
                     </Typography>
                     <Box display="flex" flexDirection="column" gap={2}>
@@ -370,7 +394,7 @@ export const ExampleComponent = () => {
           <TabPanel value={activeTab} index={1}>
             <Card className={classes.chartCard}>
               <CardContent style={{ padding: '32px' }}>
-                <Typography variant="h5" style={{ marginBottom: '24px', fontWeight: 600 }}>
+                <Typography variant="h5" className={classes.headerText} style={{ marginBottom: '24px' }}>
                   Deployment Pipeline
                 </Typography>
                 <Grid container spacing={2}>
@@ -384,10 +408,10 @@ export const ExampleComponent = () => {
                           border: '1px solid #10b98140',
                         }}
                       >
-                        <Typography variant="h6" style={{ fontWeight: 600 }}>
+                        <Typography variant="h6" className={classes.primaryText} style={{ fontWeight: 600 }}>
                           {deploy.time}
                         </Typography>
-                        <Typography variant="body1">
+                        <Typography variant="body1" className={classes.secondaryText}>
                           {deploy.success}/{deploy.deployments} successful
                         </Typography>
                         <Typography variant="caption" style={{ color: '#10b981' }}>
@@ -404,7 +428,7 @@ export const ExampleComponent = () => {
           <TabPanel value={activeTab} index={2}>
             <Card className={classes.chartCard}>
               <CardContent style={{ padding: '32px' }}>
-                <Typography variant="h5" style={{ marginBottom: '24px', fontWeight: 600 }}>
+                <Typography variant="h5" className={classes.headerText} style={{ marginBottom: '24px' }}>
                   Service Health Monitor
                 </Typography>
                 <Grid container spacing={2}>
@@ -423,13 +447,13 @@ export const ExampleComponent = () => {
               <Grid item xs={12} md={6}>
                 <Card className={classes.chartCard}>
                   <CardContent style={{ padding: '32px' }}>
-                    <Typography variant="h6" style={{ marginBottom: '24px', fontWeight: 600 }}>
+                    <Typography variant="h6" className={classes.headerText} style={{ marginBottom: '24px' }}>
                       Team Performance
                     </Typography>
                     <Box display="flex" flexDirection="column" gap={2}>
                       {['Development', 'DevOps', 'QA', 'Product'].map((team, index) => (
                         <Box key={index} display="flex" justifyContent="space-between" alignItems="center">
-                          <Typography>{team}</Typography>
+                          <Typography className={classes.primaryText}>{team}</Typography>
                           <Box display="flex" alignItems="center" gap={1}>
                             <Box 
                               width="100px" 
@@ -444,7 +468,7 @@ export const ExampleComponent = () => {
                                 style={{ background: `hsl(${index * 60}, 70%, 50%)` }}
                               />
                             </Box>
-                            <Typography variant="caption">{60 + index * 10}%</Typography>
+                            <Typography variant="caption" className={classes.accentText}>{60 + index * 10}%</Typography>
                           </Box>
                         </Box>
                       ))}
@@ -455,7 +479,7 @@ export const ExampleComponent = () => {
               <Grid item xs={12} md={6}>
                 <Card className={classes.chartCard}>
                   <CardContent style={{ padding: '32px' }}>
-                    <Typography variant="h6" style={{ marginBottom: '24px', fontWeight: 600 }}>
+                    <Typography variant="h6" className={classes.headerText} style={{ marginBottom: '24px' }}>
                       Team Metrics
                     </Typography>
                     <Box 
@@ -463,16 +487,18 @@ export const ExampleComponent = () => {
                       display="flex" 
                       alignItems="center" 
                       justifyContent="center"
+                      flexDirection="column"
                       style={{
                         background: 'linear-gradient(135deg, #667eea20 0%, #764ba220 100%)',
                         borderRadius: '12px',
-                        fontSize: '16px',
-                        color: '#6b7280'
                       }}
                     >
-                      Team productivity analytics
-                      <br />
-                      Velocity • Burndown • Sprint metrics
+                      <Typography variant="h6" className={classes.placeholderText} style={{ textAlign: 'center' }}>
+                        Team productivity analytics
+                      </Typography>
+                      <Typography variant="body1" className={classes.accentText} style={{ textAlign: 'center', marginTop: '8px' }}>
+                        Velocity • Burndown • Sprint metrics
+                      </Typography>
                     </Box>
                   </CardContent>
                 </Card>
